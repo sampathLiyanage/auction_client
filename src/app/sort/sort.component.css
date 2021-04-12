@@ -1,0 +1,9 @@
+div.sort-dropdown-container {
+  width: 100%;
+  display: flex;
+}
+
+mat-form-field {
+  margin-left: auto;
+  font-size: 12px;
+}

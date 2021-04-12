@@ -1,0 +1,17 @@
+mat-toolbar {
+  position: fixed;
+  z-index: 2;
+  background-color: darkgray;
+  color: white;
+  display: inline-flex;
+}
+
+mat-form-field {
+  align-items: center;
+  margin-left: auto;
+  width: 40%;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+

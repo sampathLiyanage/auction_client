@@ -1,0 +1,14 @@
+<app-search-bar (onSearch)="search($event)" [title]="'Online Auction'"></app-search-bar>
+<div class="list-container">
+  <app-sort [sortOptions]="sortOptions" (onSort)="sort($event)"></app-sort>
+  <mat-grid-list [cols]="columnCount"  (window:resize)="onResize($event)">
+    <mat-grid-tile *ngFor="let item of items">
+      <app-auction-item [item]="item"></app-auction-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-paginator #paginator [length]="listTotalCount"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="changePage($event)">
+  </mat-paginator>
+</div>
