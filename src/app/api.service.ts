@@ -15,7 +15,7 @@ export interface ParamsForGetAuctionItem {
 
 export interface ResponseForAuctionItems {
   data: AuctionItem[];
-  meta: object;
+  meta: any;
 }
 
 @Injectable({
@@ -29,8 +29,8 @@ export class ApiService {
     private serializer: UrlSerializer) {
   }
 
-  getAuctionItems(params: ParamsForGetAuctionItem): Observable<GenericApiResponse> {
-    return this.http.get<GenericApiResponse>(ConfigService.API_BASE_URL + 'items' + this.getUrlParams(params));
+  getAuctionItems(params: ParamsForGetAuctionItem): Observable<ResponseForAuctionItems> {
+    return this.http.get<ResponseForAuctionItems>(ConfigService.API_BASE_URL + 'items' + this.getUrlParams(params));
   }
 
   private getUrlParams(queryParams: any): any {
