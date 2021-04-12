@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 export interface SelectOption {
   name: string;
-  value: stirng;
+  value: string;
 }
 
 @Component({
