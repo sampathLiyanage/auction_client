@@ -19,7 +19,7 @@ export class ItemListComponent implements OnInit {
   pageIndex = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   sortOptions: any[];
-  @ViewChild('paginator') paginator: MatPaginator;
+  @ViewChild('paginator') paginator: any;
   private lastSortField: string;
   private lastSortOrder: string;
   private lastSearch: string;
