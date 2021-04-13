@@ -1,0 +1,9 @@
+<mat-toolbar>
+  <span>{{title}}</span>
+  <mat-form-field *ngIf="onSearch">
+    <mat-label>Search</mat-label>
+    <input autocomplete="off" placeholder="Enter Name or Description" [(ngModel)]="searchString" matInput>
+  </mat-form-field>
+  <mat-icon  *ngIf="onSearch.observers.length" aria-hidden="false" aria-label="Example home icon" (click)="onSearch.emit(searchString)">search</mat-icon>
+  <mat-icon  *ngIf="onConfig.observers.length" aria-hidden="false" aria-label="Example home icon" (click)="onConfig.emit()">setting</mat-icon>
+</mat-toolbar>

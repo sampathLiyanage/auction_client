@@ -9,6 +9,7 @@ export class SearchBarComponent implements OnInit {
 
   @Input() title!: string;
   @Output() onSearch: EventEmitter<any> = new EventEmitter();
+  @Output() onConfig: EventEmitter<any> = new EventEmitter();
 
   searchString: string;
   constructor() {
@@ -18,8 +19,8 @@ export class SearchBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  search(): void {
+  getType() {
     debugger;
-    this.onSearch.emit(this.searchString);
+    return typeof this.onConfig === 'undefined';
   }
 }
