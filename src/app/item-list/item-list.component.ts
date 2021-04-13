@@ -10,7 +10,6 @@ import {MatPaginator} from '@angular/material/paginator';
 })
 export class ItemListComponent implements OnInit {
 
-  columnCount: number;
   itemCount: number;
 
   items: AuctionItem[];
@@ -26,7 +25,6 @@ export class ItemListComponent implements OnInit {
 
   // MatPaginator Output
   constructor(private apiService: ApiService) {
-    this.columnCount = 3;
     this.itemCount = 10;
     this.items = [];
     this.lastSearch = '';
@@ -37,21 +35,6 @@ export class ItemListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.columnCount = this.getColumnCount(window.innerWidth);
-  }
-
-  onResize(event: any): void {
-    this.columnCount = this.getColumnCount(event.target.innerWidth);
-  }
-
-  getColumnCount(screenWidth: number): number {
-    if (screenWidth <= 400) {
-      return 1;
-    } else if (screenWidth <= 800) {
-      return 3;
-    } else {
-      return 5;
-    }
   }
 
   changePage = ($event: any) => {
