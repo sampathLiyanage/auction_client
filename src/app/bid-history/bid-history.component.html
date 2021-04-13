@@ -1,0 +1,16 @@
+<table *ngIf="bidHistoryList" mat-table [dataSource]="bidHistoryList" class="mat-elevation-z1">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> User Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef> Amount </th>
+    <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+  </ng-container>
+  <ng-container matColumnDef="created_at">
+    <th mat-header-cell *matHeaderCellDef> Time </th>
+    <td mat-cell *matCellDef="let element"> {{formatDateTime(element.created_at)}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
