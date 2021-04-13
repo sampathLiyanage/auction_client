@@ -14,4 +14,6 @@ mat-form-field {
   margin-top: 10px;
 }
 
-
+mat-icon {
+  cursor: pointer;
+}
