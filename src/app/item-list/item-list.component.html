@@ -1,11 +1,16 @@
 <app-search-bar (onSearch)="search($event)" [title]="'Online Auction'"></app-search-bar>
 <div class="list-container">
   <app-sort [sortOptions]="sortOptions" (onSort)="sort($event)"></app-sort>
-  <mat-grid-list [cols]="columnCount" gutterSize="20px" (window:resize)="onResize($event)">
-    <mat-grid-tile *ngFor="let item of items">
-      <app-auction-item [item]="item"></app-auction-item>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <div
+    fxLayout="row wrap"
+    fxLayout.lt-sm="column"
+    fxLayoutGap="32px"
+    fxLayoutAlign="flex-start">
+    <app-auction-item  fxFlex="0 1 calc(20% - 32px)"
+                       fxFlex.lt-md="0 1 calc(33.3% - 32px)"
+                       fxFlex.lt-sm="100%"
+                       *ngFor="let item of items" [item]="item"></app-auction-item>
+  </div>
   <mat-paginator #paginator [length]="listTotalCount"
                  [pageSize]="pageSize"
                  [pageSizeOptions]="pageSizeOptions"

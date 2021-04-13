@@ -18,6 +18,7 @@ import {FormsModule} from '@angular/forms';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SortComponent } from './sort/sort.component';
 import {MatSelectModule} from '@angular/material/select';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatIconModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
