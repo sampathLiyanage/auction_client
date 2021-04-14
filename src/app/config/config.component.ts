@@ -10,8 +10,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class ConfigComponent implements OnInit {
 
-  private maxBidAmount!: number;
-  private configForm!: FormGroup;
+  maxBidAmount!: number;
+  configForm!: FormGroup;
   constructor(private apiService: ApiService, private formBuilder: FormBuilder, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
