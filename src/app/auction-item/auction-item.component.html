@@ -8,7 +8,7 @@
       {{ item.description }}
     </p>
     <app-count-down-timer *ngIf="!showSummaryOnly" [endTime]="item.auction_end_time"></app-count-down-timer>
-    <p *ngIf="!showSummaryOnly"  class="latest-bid">Latest Bid $5</p>
+    <p *ngIf="!showSummaryOnly && latestBid"  class="latest-bid">Latest Bid: ${{latestBid}}</p>
   </mat-card-content>
   <div class="item-actions">
     <mat-form-field *ngIf="!showSummaryOnly" >

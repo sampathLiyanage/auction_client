@@ -35,7 +35,6 @@ export class BiddingComponent implements OnInit {
       .subscribe(item => {
         this.item = item.data;
         this.itemName = this.item ? this.item.name : '';
-        debugger
       });
   }
 

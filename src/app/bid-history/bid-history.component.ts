@@ -8,10 +8,14 @@ import {ApiService} from '../api.service';
 })
 export class BidHistoryComponent implements OnInit {
 
-  @Input() itemId !: number;
-  constructor(private apiService: ApiService) { }
   displayedColumns: string[] = ['name', 'amount', 'created_at'];
   bidHistoryList!: any[];
+  public latestBid: number | null;
+
+  @Input() itemId !: number;
+  constructor(private apiService: ApiService) {
+    this.latestBid = null;
+  }
 
   ngOnInit(): void {
     this.getBidHistory();
@@ -19,17 +23,25 @@ export class BidHistoryComponent implements OnInit {
 
   formatDateTime(datetime: string): string {
     const date = new Date(datetime);
-    return date.toLocaleString();
+    return date.toLocaleString('en-US', {hour12: true });
   }
 
   getBidHistory(): void {
     this.apiService.getBidHistory({itemId: this.itemId})
       .subscribe(items => {
-        debugger;
         this.bidHistoryList = items.data.map((element: any) => {
           element.name = element.user.name;
           return element;
         });
+        this.setLatestBid();
       });
+  }
+
+  setLatestBid(): void {
+    if (Array.isArray(this.bidHistoryList) && this.bidHistoryList.length > 0) {
+      this.latestBid = this.bidHistoryList[0].amount;
+    } else {
+      this.latestBid = null;
+    }
   }
 }

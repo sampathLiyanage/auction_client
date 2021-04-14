@@ -10,6 +10,7 @@ import { AuctionItem } from '../app.auction-item';
 export class AuctionItemComponent implements OnInit {
 
   @Input() item!: AuctionItem;
+  @Input() latestBid!: number;
   @Input() showSummaryOnly: boolean;
   @Output() onBid: EventEmitter<any> = new EventEmitter();
   bidAmount!: number;
@@ -22,7 +23,6 @@ export class AuctionItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
   }
 
 }

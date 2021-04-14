@@ -4,10 +4,13 @@
   fxLayout.lt-sm="column"
   fxLayoutGap="32px"
   fxLayoutAlign="flex-start">
-  <app-auction-item *ngIf="item" [showSummaryOnly]="false" fxFlex="0 1 calc(33.3% - 32px)"
+  <app-auction-item *ngIf="item" [showSummaryOnly]="false"
+                    fxFlex="0 1 calc(33.3% - 32px)"
                      fxFlex.lt-md="100%"
                      fxFlex.lt-sm="100%"
-                     [item]="item" (onBid)="bidNow($event)"></app-auction-item>
+                     [item]="item"
+                    [latestBid]="bidHistoryList?.latestBid"
+                    (onBid)="bidNow($event)"></app-auction-item>
   <div fxFlex="0 1 calc(66.6% - 32px)"
        fxFlex.lt-md="100%"
        fxFlex.lt-sm="100%">
