@@ -1,0 +1,14 @@
+<form #configFormRef="ngForm" [formGroup]="configForm" (ngSubmit)="saveConfig(configFormRef)">
+  <div mat-dialog-content>
+    <p>Configuration</p>
+      <mat-form-field>
+        <mat-label>Maximum auto bid amount</mat-label>
+        <input matInput formControlName="maxBidInput" [(ngModel)]="maxBidAmount" type="number" min="0">
+        <mat-error *ngIf="configForm.get('maxBidInput')?.hasError('min')">Should be a positive number</mat-error>
+      </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]>Cancel</button>
+    <button type="submit" mat-button [mat-dialog-close] cdkFocusInitial [disabled]="!configForm.valid">Save</button>
+  </div>
+</form>

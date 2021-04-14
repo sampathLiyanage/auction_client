@@ -45,8 +45,4 @@ export class BiddingComponent implements OnInit {
       this.bidHistoryList.getBidHistory();
     });
   }
-
-  config(): void {
-
-  }
 }

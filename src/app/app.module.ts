@@ -27,6 +27,7 @@ import {MatTableModule} from '@angular/material/table';
 import { LoginComponent } from './login/login.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ConfigComponent } from './config/config.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     BiddingComponent,
     CountDownTimerComponent,
     BidHistoryComponent,
-    LoginComponent
+    LoginComponent,
+    ConfigComponent
   ],
   imports: [
     BrowserModule,
