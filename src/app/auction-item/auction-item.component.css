@@ -9,7 +9,7 @@ mat-card {
   flex-direction: column;
 }
 
-.item-actions {
+form {
   margin-top: auto;
   margin-bottom: 10px;
   bottom: 10px;
@@ -19,4 +19,8 @@ mat-card {
 
 .latest-bid {
   font-weight: 500;
+}
+
+button {
+  margin-top: 10px;
 }

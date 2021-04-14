@@ -10,10 +10,12 @@
     <app-count-down-timer *ngIf="!showSummaryOnly" [endTime]="item.auction_end_time"></app-count-down-timer>
     <p *ngIf="!showSummaryOnly && latestBid"  class="latest-bid">Latest Bid: ${{latestBid}}</p>
   </mat-card-content>
-  <div class="item-actions">
+  <form #bidFormRef="ngForm" [formGroup]="bidForm" (ngSubmit)="bidNow(bidFormRef)" class="example-form">
     <mat-form-field *ngIf="!showSummaryOnly" >
-      <input autocomplete="off" placeholder="Enter Amount to Bid" [(ngModel)]="bidAmount" matInput>
+      <input type="number" formControlName="bidInput" autocomplete="off" placeholder="Enter Amount to Bid" [(ngModel)]="bidAmount" matInput>
+      <mat-error *ngIf="bidForm.get('bidInput')?.hasError('required')">Required</mat-error>
+      <mat-error *ngIf="bidForm.get('bidInput')?.hasError('min')">Should be larger than ${{latestBid?latestBid:0}}</mat-error>
     </mat-form-field>
-    <button (click)="bidNow()" mat-flat-button color="primary">Bid Now</button>
-  </div>
+    <button type="submit" mat-flat-button color="primary">Bid Now</button>
+  </form>
 </mat-card>

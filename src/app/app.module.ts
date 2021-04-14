@@ -14,7 +14,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { SortComponent } from './sort/sort.component';
 import {MatSelectModule} from '@angular/material/select';
@@ -56,7 +56,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     FlexLayoutModule,
     MatButtonModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
