@@ -41,7 +41,8 @@ export class BiddingComponent implements OnInit {
   }
 
   bidNow(event: any): void {
-    this.apiService.placeBid({item_id: event.item.id, amount: event.bid}).subscribe(() => {
+    debugger;
+    this.apiService.placeBid({item_id: event.item.id, amount: event.bid, is_auto_bid: event.is_auto_bid}).subscribe(() => {
       this.snackbar.open('Bid Placed Successfully', undefined, {duration: 5000});
       this.bidHistoryList.getBidHistory();
     });

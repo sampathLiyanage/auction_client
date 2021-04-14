@@ -19,8 +19,10 @@ export class AuctionItemComponent implements OnInit {
   @Output() onBid: EventEmitter<any> = new EventEmitter();
   bidAmount!: number;
   bidForm!: FormGroup;
+  isAutoBid !: boolean;
   constructor(private apiService: ApiService, private formBuilder: FormBuilder) {
     this.showSummaryOnly = true;
+    this.isAutoBid = false;
   }
 
   bidNow(form: any): void {
@@ -28,6 +30,10 @@ export class AuctionItemComponent implements OnInit {
       this.onBid.emit({item: this.item, bid: this.bidAmount});
       this.bidForm.get('bidInput')?.updateValueAndValidity();
     }
+  }
+
+  toggleAutoBid(): void {
+    this.onBid.emit({item: this.item, bid: null, is_auto_bid: this.isAutoBid});
   }
 
   isBiddingOngoing(): boolean {

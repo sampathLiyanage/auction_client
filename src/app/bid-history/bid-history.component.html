@@ -8,7 +8,7 @@
     <td mat-cell *matCellDef="let element"> ${{element.amount}} </td>
   </ng-container>
   <ng-container matColumnDef="created_at">
-    <th mat-header-cell *matHeaderCellDef> Time </th>
+    <th mat-header-cell *matHeaderCellDef> Bidding Time </th>
     <td mat-cell *matCellDef="let element"> {{formatDateTime(element.created_at)}} </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

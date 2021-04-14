@@ -102,7 +102,7 @@ export class ApiService {
       observer.complete();
     });
     if (!this.isLoggedIn()) {
-      this.login();
+      this.login().subscribe();
     } else {
       return this.doPlaceBid(params);
     }
