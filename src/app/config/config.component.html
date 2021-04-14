@@ -2,7 +2,7 @@
   <div mat-dialog-content>
     <p>Configuration</p>
       <mat-form-field>
-        <mat-label>Maximum auto bid amount</mat-label>
+        <mat-label>Maximum Auto Bid Amount</mat-label>
         <input matInput formControlName="maxBidInput" [(ngModel)]="maxBidAmount" type="number" min="0">
         <mat-error *ngIf="configForm.get('maxBidInput')?.hasError('min')">Should be a positive number</mat-error>
       </mat-form-field>

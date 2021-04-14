@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
+import {interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-bid-history',
@@ -11,6 +12,7 @@ export class BidHistoryComponent implements OnInit {
   displayedColumns: string[] = ['name', 'amount', 'created_at'];
   bidHistoryList!: any[];
   public latestBid: number | null;
+  private subscription!: Subscription;
 
   @Input() itemId !: number;
   constructor(private apiService: ApiService) {
@@ -19,6 +21,13 @@ export class BidHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBidHistory();
+    this.subscription = interval(30000).subscribe(x => {
+      this.getBidHistory();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   formatDateTime(datetime: string): string {

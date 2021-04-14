@@ -6,6 +6,7 @@ import {LoginComponent} from '../login/login.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {BidHistoryComponent} from '../bid-history/bid-history.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-bidding',

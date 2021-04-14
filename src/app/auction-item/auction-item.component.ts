@@ -4,6 +4,7 @@ import { AuctionItem } from '../app.auction-item';
 import {BidHistoryComponent} from '../bid-history/bid-history.component';
 import {MatInput} from '@angular/material/input';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, NgModel, Validators} from '@angular/forms';
+import {interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-auction-item',
@@ -27,6 +28,28 @@ export class AuctionItemComponent implements OnInit {
       this.onBid.emit({item: this.item, bid: this.bidAmount});
       this.bidForm.get('bidInput')?.updateValueAndValidity();
     }
+  }
+
+  isBiddingOngoing(): boolean {
+    if (typeof this.item === 'undefined' || this.item.auction_end_time === null) {
+      return false;
+    }
+    const currentDateTimeUtc = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    if (Date.parse(this.item.auction_end_time) <= Date.parse(currentDateTimeUtc)) {
+      return false;
+    }
+    return true;
+  }
+
+  getBidNowButtonLabel(): string {
+    if (typeof this.item === 'undefined' || this.item.auction_end_time === null) {
+      return this.showSummaryOnly ? 'More Details' : 'Bidding Not Started';
+    }
+    const currentDateTimeUtc = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    if (Date.parse(this.item.auction_end_time) <= Date.parse(currentDateTimeUtc)) {
+      return this.showSummaryOnly ? 'More Details' : 'Bidding Closed';
+    }
+    return 'Bid Now';
   }
 
   ngOnInit(): void {

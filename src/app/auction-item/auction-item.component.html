@@ -11,11 +11,11 @@
     <p *ngIf="!showSummaryOnly && latestBid"  class="latest-bid">Latest Bid: ${{latestBid}}</p>
   </mat-card-content>
   <form #bidFormRef="ngForm" [formGroup]="bidForm" (ngSubmit)="bidNow(bidFormRef)">
-    <mat-form-field *ngIf="!showSummaryOnly" >
+    <mat-form-field *ngIf="!showSummaryOnly && isBiddingOngoing()" >
       <input type="number" formControlName="bidInput" autocomplete="off" placeholder="Enter Amount to Bid" [(ngModel)]="bidAmount" matInput>
       <mat-error *ngIf="bidForm.get('bidInput')?.hasError('required')">Required</mat-error>
       <mat-error *ngIf="bidForm.get('bidInput')?.hasError('min')">Should be larger than ${{latestBid?latestBid:0}}</mat-error>
     </mat-form-field>
-    <button type="submit" mat-flat-button color="primary">Bid Now</button>
+    <button type="submit" [disabled]="!showSummaryOnly && !isBiddingOngoing()" mat-raised-button [color]="isBiddingOngoing()?'primary':''">{{getBidNowButtonLabel()}}</button>
   </form>
 </mat-card>
