@@ -6,14 +6,25 @@ mat-toolbar {
   display: inline-flex;
 }
 
-mat-form-field {
-  align-items: center;
+div.top-bar-right-side {
   margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
   width: 40%;
+  align-items: center;
   font-size: 14px;
   margin-top: 10px;
 }
 
 mat-icon {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.main-title {
   cursor: pointer;
 }
