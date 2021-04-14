@@ -5,6 +5,7 @@ import {AuctionItem} from '../app.auction-item';
 import {LoginComponent} from '../login/login.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {BidHistoryComponent} from '../bid-history/bid-history.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-bidding',
@@ -17,7 +18,7 @@ export class BiddingComponent implements OnInit {
   item: AuctionItem | null;
   itemName: string;
   @ViewChild(BidHistoryComponent) bidHistoryList!: BidHistoryComponent;
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private snackbar: MatSnackBar) {
     this.itemId = null;
     this.item = null;
     this.itemName = '';
@@ -40,6 +41,7 @@ export class BiddingComponent implements OnInit {
 
   bidNow(event: any): void {
     this.apiService.placeBid({item_id: event.item.id, amount: event.bid}).subscribe(() => {
+      this.snackbar.open('Bid Placed Successfully', undefined, {duration: 5000});
       this.bidHistoryList.getBidHistory();
     });
   }

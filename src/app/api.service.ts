@@ -5,6 +5,7 @@ import {ConfigService} from './config.service';
 import {Router, UrlSerializer} from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {LoginComponent} from './login/login.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface UserCredentials{
   api_token: string | null;
@@ -22,7 +23,8 @@ export class ApiService {
     private http: HttpClient,
     private router: Router,
     private serializer: UrlSerializer,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) {
   }
 
   login(): Observable<any> {
@@ -33,6 +35,10 @@ export class ApiService {
             user = user.data;
             localStorage.setItem('api_token', user.api_token);
             localStorage.setItem('user_id', user.id);
+            this.snackBar.open('Logged In Successfully', undefined, {duration: 2000});
+            observer.complete();
+          }, error => {
+            this.snackBar.open('Invalid Credentials', undefined, {duration: 2000});
             observer.complete();
           });
         } else {
@@ -41,6 +47,22 @@ export class ApiService {
       });
       return {unsubscribe() {}};
     });
+  }
+
+  isLoggedIn(): boolean {
+    const user = this.getUser();
+    const apiToken = user?.api_token;
+    const userId = user?.user_id;
+    if (apiToken && userId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.snackBar.open('Logged Out Successfully', undefined, {duration: 2000});
   }
 
   getAuctionItems(params: any): Observable<any> {
@@ -59,21 +81,21 @@ export class ApiService {
     const dummyObservable = new Observable<any>((observer) => {
       observer.complete();
     });
-    const user = this.getUser();
-    const apiToken = user?.api_token;
-    if (!apiToken) {
+    if (!this.isLoggedIn()) {
       this.login().subscribe(() => {
-          params.user_id = user?.user_id;
-          return this.doPlaceBid(params, apiToken);
+          return this.doPlaceBid(params);
       });
     } else {
-      params.user_id = user?.user_id;
-      return this.doPlaceBid(params, apiToken);
+      return this.doPlaceBid(params);
     }
     return dummyObservable;
   }
 
-  private doPlaceBid(params: any, apiToken: any): Observable<any> {
+  private doPlaceBid(params: any): Observable<any> {
+    const user = this.getUser();
+    const apiToken = user?.api_token;
+    const userId = user?.user_id;
+    params.user_id = userId;
     return this.http.post<any>(
       ConfigService.API_BASE_URL + 'bids',
       params,
