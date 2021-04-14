@@ -11,7 +11,7 @@
                      [item]="item"
                     [latestBid]="bidHistoryList?.latestBid"
                     (onBid)="bidNow($event)"></app-auction-item>
-  <div fxFlex="0 1 calc(66.6% - 32px)"
+  <div fxFlex="0 1 calc(66.6%)"
        fxFlex.lt-md="100%"
        fxFlex.lt-sm="100%">
     <app-bid-history *ngIf="item" #bidHistoryList [itemId]="item.id"></app-bid-history>

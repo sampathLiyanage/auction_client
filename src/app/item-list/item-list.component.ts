@@ -80,6 +80,7 @@ export class ItemListComponent implements OnInit {
       .subscribe(items => {
         this.items = items.data;
         this.listTotalCount = items.meta.total;
+        window.scrollTo(0, 0 );
       });
   }
 }
