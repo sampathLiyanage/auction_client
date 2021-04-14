@@ -1,4 +1,4 @@
-<app-search-bar (onSearch)="search($event)" [title]="'Online Auction'"></app-search-bar>
+<app-top-bar (onSearch)="search($event)"></app-top-bar>
 <div class="list-container">
   <app-sort [sortOptions]="sortOptions" (onSort)="sort($event)"></app-sort>
   <div
@@ -9,7 +9,7 @@
     <app-auction-item  fxFlex="0 1 calc(20% - 32px)"
                        fxFlex.lt-md="0 1 calc(33.3% - 32px)"
                        fxFlex.lt-sm="100%"
-                       *ngFor="let item of items" [item]="item"></app-auction-item>
+                       *ngFor="let item of items" [item]="item" (onBid)="showDetailedView($event)"></app-auction-item>
   </div>
   <mat-paginator #paginator [length]="listTotalCount"
                  [pageSize]="pageSize"

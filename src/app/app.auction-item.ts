@@ -3,4 +3,5 @@ export interface AuctionItem {
   name: string;
   description: string;
   price: number;
+  auction_end_time: string;
 }

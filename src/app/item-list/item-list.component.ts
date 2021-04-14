@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuctionItem} from '../app.auction-item';
 import {ApiService} from '../api.service';
-import {MatPaginator} from '@angular/material/paginator';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-item-list',
@@ -24,7 +24,7 @@ export class ItemListComponent implements OnInit {
   private lastSearch: string;
 
   // MatPaginator Output
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private router: Router ) {
     this.itemCount = 10;
     this.items = [];
     this.lastSearch = '';
@@ -63,6 +63,10 @@ export class ItemListComponent implements OnInit {
       this.lastSortOrder = '';
     }
     this.getAuctionItems();
+  }
+
+  showDetailedView(event: any): void {
+    this.router.navigate(['/items/' + event.item.id]);
   }
 
   private getAuctionItems(): void {

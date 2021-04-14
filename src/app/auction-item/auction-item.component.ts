@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ApiService } from '../api.service';
 import { AuctionItem } from '../app.auction-item';
 
@@ -10,10 +10,19 @@ import { AuctionItem } from '../app.auction-item';
 export class AuctionItemComponent implements OnInit {
 
   @Input() item!: AuctionItem;
+  @Input() showSummaryOnly: boolean;
+  @Output() onBid: EventEmitter<any> = new EventEmitter();
+  bidAmount!: number;
   constructor(private apiService: ApiService) {
+    this.showSummaryOnly = true;
+  }
+
+  bidNow(): void {
+    this.onBid.emit({item: this.item, bid: this.bidAmount});
   }
 
   ngOnInit(): void {
+    debugger;
   }
 
 }

@@ -1,6 +1,22 @@
+mat-card.summary-only {
+  height: calc(100% - 30px);
+}
+
 mat-card {
   width: calc(100% - 30px);
-  height: calc(100% - 30px);
   overflow: hidden;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-actions {
+  margin-top: auto;
+  margin-bottom: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.latest-bid {
+  font-weight: 500;
 }
