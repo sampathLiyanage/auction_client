@@ -74,49 +74,21 @@ export class ApiService {
   }
 
   getConfiguration(): Observable<any> {
-    const dummyObservable = new Observable<any>((observer) => {
-      observer.complete();
-    });
-    if (!this.isLoggedIn()) {
-      this.login().subscribe(() => {
-        return this.doGetConfiguration();
-      });
-    } else {
-      return this.doGetConfiguration();
-    }
-    return dummyObservable;
-  }
-
-  updateConfiguration(config: any): Observable<any> {
-    const dummyObservable = new Observable<any>((observer) => {
-      observer.complete();
-    });
-    if (!this.isLoggedIn()) {
-      this.login().subscribe(() => {
-        return this.doUpdateConfiguration(config);
-      });
-    } else {
-      return this.doUpdateConfiguration(config);
-    }
-    return dummyObservable;
-  }
-
-  private doUpdateConfiguration(config: any): Observable<any> {
-    const user = this.getUser();
-    const apiToken = user?.api_token;
-    const userId = user?.user_id;
-    return this.http.patch<any>(
-      ConfigService.API_BASE_URL + 'configurations/' + userId, config,
-      {headers: new HttpHeaders({Authorization: 'Bearer ' + apiToken})}
-    );
-  }
-
-  private doGetConfiguration(): Observable<any> {
     const user = this.getUser();
     const apiToken = user?.api_token;
     const userId = user?.user_id;
     return this.http.get<any>(
       ConfigService.API_BASE_URL + 'configurations/' + userId,
+      {headers: new HttpHeaders({Authorization: 'Bearer ' + apiToken})}
+    );
+  }
+
+  updateConfiguration(config: any): Observable<any> {
+    const user = this.getUser();
+    const apiToken = user?.api_token;
+    const userId = user?.user_id;
+    return this.http.patch<any>(
+      ConfigService.API_BASE_URL + 'configurations/' + userId, config,
       {headers: new HttpHeaders({Authorization: 'Bearer ' + apiToken})}
     );
   }
@@ -130,9 +102,7 @@ export class ApiService {
       observer.complete();
     });
     if (!this.isLoggedIn()) {
-      this.login().subscribe(() => {
-          return this.doPlaceBid(params);
-      });
+      this.login();
     } else {
       return this.doPlaceBid(params);
     }
