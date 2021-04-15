@@ -41,9 +41,12 @@ export class BiddingComponent implements OnInit {
   }
 
   bidNow(event: any): void {
-    debugger;
     this.apiService.placeBid({item_id: event.item.id, amount: event.bid, is_auto_bid: event.is_auto_bid}).subscribe(() => {
-      this.snackbar.open('Bid Placed Successfully', undefined, {duration: 5000});
+      let message = 'Bid Placed Successfully';
+      if (event.bid === null) {
+        message = event.is_auto_bid ? 'Auto Bid Enabled' : 'Auto Bid Disabled';
+      }
+      this.snackbar.open(message, undefined, {duration: 5000});
       this.bidHistoryList.getBidHistory();
     });
   }
