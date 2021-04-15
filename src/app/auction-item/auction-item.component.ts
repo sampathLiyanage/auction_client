@@ -21,7 +21,7 @@ export class AuctionItemComponent implements OnInit {
   @Output() onToggleAutoBid: EventEmitter<any> = new EventEmitter();
   bidAmount!: number;
   bidForm!: FormGroup;
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder) {
+  constructor(public apiService: ApiService, private formBuilder: FormBuilder) {
     this.showSummaryOnly = true;
   }
 
