@@ -34,10 +34,7 @@ export class ConfigComponent implements OnInit {
 
   getConfig(): void {
     this.apiService.getConfiguration().subscribe(config => {
-      if (typeof config.configuration === 'string' && config.constructor.length > 0) {
-        const configuration = JSON.parse(config.configuration);
-        this.maxBidAmount = configuration.max_bid_amount;
-      }
+      this.maxBidAmount = config.max_bid_amount;
     });
   }
 }
