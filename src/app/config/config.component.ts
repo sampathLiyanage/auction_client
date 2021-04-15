@@ -34,6 +34,7 @@ export class ConfigComponent implements OnInit {
 
   getConfig(): void {
     this.apiService.getConfiguration().subscribe(config => {
+      config = config.data;
       this.maxBidAmount = config.max_bid_amount;
     });
   }

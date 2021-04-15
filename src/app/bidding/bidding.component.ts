@@ -70,6 +70,7 @@ export class BiddingComponent implements OnInit {
 
   openBiddingConfigurationWarning(): void {
     this.apiService.getConfiguration().subscribe((config) => {
+      config = config.data;
       if (config.max_bid_amount === null) {
         const snackBarRef = this.snackbar.open(
           'Maximum Auto Bid Amount Needs to be Configured For Auto Bidding to Work', 'Configure'
