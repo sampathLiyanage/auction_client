@@ -10,7 +10,9 @@
                      fxFlex.lt-sm="100%"
                      [item]="item"
                     [latestBid]="bidHistoryList?.latestBid"
-                    (onBid)="bidNow($event)"></app-auction-item>
+                    (onBid)="bidNow($event)"
+                    [autoBidEnabled]="autoBidEnabled"
+                    (onToggleAutoBid)="updateAutoBidStatus($event)"></app-auction-item>
   <div fxFlex="0 1 calc(66.6%)"
        fxFlex.lt-md="100%"
        fxFlex.lt-sm="100%">

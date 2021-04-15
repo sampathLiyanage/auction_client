@@ -15,14 +15,14 @@ export class AuctionItemComponent implements OnInit {
 
   @Input() item!: AuctionItem;
   @Input() latestBid!: number | null | undefined;
+  @Input() autoBidEnabled!: boolean | null | undefined;
   @Input() showSummaryOnly: boolean;
   @Output() onBid: EventEmitter<any> = new EventEmitter();
+  @Output() onToggleAutoBid: EventEmitter<any> = new EventEmitter();
   bidAmount!: number;
   bidForm!: FormGroup;
-  isAutoBid !: boolean;
   constructor(private apiService: ApiService, private formBuilder: FormBuilder) {
     this.showSummaryOnly = true;
-    this.isAutoBid = false;
   }
 
   bidNow(form: any): void {
@@ -33,7 +33,7 @@ export class AuctionItemComponent implements OnInit {
   }
 
   toggleAutoBid(): void {
-    this.onBid.emit({item: this.item, bid: null, is_auto_bid: this.isAutoBid});
+    this.onToggleAutoBid.emit({item: this.item, auto_bid_enabled: this.autoBidEnabled});
   }
 
   isBiddingOngoing(): boolean {

@@ -93,6 +93,26 @@ export class ApiService {
     );
   }
 
+  updateAutoBidStatus(params: any): Observable<any> {
+    const user = this.getUser();
+    const apiToken = user?.api_token;
+    params.user_id = user?.user_id;
+    return this.http.patch<any>(
+      ConfigService.API_BASE_URL + 'autoBidStatus', params,
+      {headers: new HttpHeaders({Authorization: 'Bearer ' + apiToken})}
+    );
+  }
+
+  getAutoBidStatus(params: any): Observable<any> {
+    const user = this.getUser();
+    const apiToken = user?.api_token;
+    params.user_id = user?.user_id;
+    return this.http.get<any>(
+      ConfigService.API_BASE_URL + 'autoBidStatus' + this.getUrlParams(params),
+      {headers: new HttpHeaders({Authorization: 'Bearer ' + apiToken})}
+    );
+  }
+
   getBidHistory(params: any): Observable<any> {
     return this.http.get<any>(ConfigService.API_BASE_URL + 'bids' + this.getUrlParams(params));
   }

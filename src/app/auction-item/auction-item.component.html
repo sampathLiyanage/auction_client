@@ -11,12 +11,12 @@
     <p *ngIf="!showSummaryOnly && latestBid"  class="latest-bid">Latest Bid: ${{latestBid}}</p>
   </mat-card-content>
   <form #bidFormRef="ngForm" [formGroup]="bidForm" (ngSubmit)="bidNow(bidFormRef)">
-    <mat-form-field *ngIf="!showSummaryOnly && isBiddingOngoing() && !isAutoBid" >
+    <mat-form-field *ngIf="!showSummaryOnly && isBiddingOngoing() && !autoBidEnabled" >
       <input type="number" formControlName="bidInput" autocomplete="off" placeholder="Enter Amount to Bid" [(ngModel)]="bidAmount" matInput>
       <mat-error *ngIf="bidForm.get('bidInput')?.hasError('required')">Required</mat-error>
       <mat-error *ngIf="bidForm.get('bidInput')?.hasError('min')">Should be larger than ${{latestBid?latestBid:0}}</mat-error>
     </mat-form-field>
-    <button type="submit" [disabled]="(!showSummaryOnly && !isBiddingOngoing()) || isAutoBid" mat-raised-button [color]="isBiddingOngoing()?'primary':''">{{getBidNowButtonLabel()}}</button>
+    <button type="submit" [disabled]="(!showSummaryOnly && !isBiddingOngoing()) || autoBidEnabled" mat-raised-button [color]="isBiddingOngoing()?'primary':''">{{getBidNowButtonLabel()}}</button>
   </form>
-  <mat-slide-toggle [disabled]="(!showSummaryOnly && !isBiddingOngoing())" (change)="toggleAutoBid()" *ngIf="apiService.isLoggedIn() && !showSummaryOnly" [(ngModel)]="isAutoBid"  color="primary">Auto Bid</mat-slide-toggle>
+  <mat-slide-toggle [disabled]="(!showSummaryOnly && !isBiddingOngoing())" (change)="toggleAutoBid()" *ngIf="apiService.isLoggedIn() && !showSummaryOnly" [(ngModel)]="autoBidEnabled"  color="primary">Auto Bid</mat-slide-toggle>
 </mat-card>

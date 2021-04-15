@@ -18,17 +18,20 @@ export class BiddingComponent implements OnInit {
   itemId: string | null;
   item: AuctionItem | null;
   itemName: string;
+  autoBidEnabled!: boolean | null;
   @ViewChild(BidHistoryComponent) bidHistoryList!: BidHistoryComponent;
   constructor(private route: ActivatedRoute, private apiService: ApiService, private snackbar: MatSnackBar) {
     this.itemId = null;
     this.item = null;
     this.itemName = '';
+    this.autoBidEnabled = false;
   }
 
   ngOnInit(): void {
     this.itemId = this.route.snapshot.paramMap.get('id');
     if (this.itemId) {
       this.getAuctionItem(this.itemId);
+      this.getAutoBidStatus(this.itemId);
     }
   }
 
@@ -40,12 +43,25 @@ export class BiddingComponent implements OnInit {
       });
   }
 
+
+  private getAutoBidStatus(itemId: any): void {
+    this.apiService.getAutoBidStatus({item_id: itemId})
+      .subscribe(status => {
+        this.autoBidEnabled = status.data.auto_bid_enabled ? true : false;
+      });
+  }
+
   bidNow(event: any): void {
     this.apiService.placeBid({item_id: event.item.id, amount: event.bid, is_auto_bid: event.is_auto_bid}).subscribe(() => {
+      this.snackbar.open('Bid Placed Successfully', undefined, {duration: 5000});
+      this.bidHistoryList.getBidHistory();
+    });
+  }
+
+  updateAutoBidStatus(event: any): void {
+    this.apiService.updateAutoBidStatus({item_id: event.item.id, auto_bid_enabled: event.auto_bid_enabled}).subscribe(() => {
       let message = 'Bid Placed Successfully';
-      if (event.bid === null) {
-        message = event.is_auto_bid ? 'Auto Bid Enabled' : 'Auto Bid Disabled';
-      }
+      message = event.auto_bid_enabled ? 'Auto Bid Enabled' : 'Auto Bid Disabled';
       this.snackbar.open(message, undefined, {duration: 5000});
       this.bidHistoryList.getBidHistory();
     });
