@@ -9,7 +9,7 @@ import {interval, Subscription} from 'rxjs';
 })
 export class BidHistoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'amount', 'created_at'];
+  displayedColumns: string[] = ['name', 'amount', 'created_at', 'is_auto_bid'];
   bidHistoryList!: any[];
   public latestBid: number | null;
   private subscription!: Subscription;
@@ -21,7 +21,7 @@ export class BidHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBidHistory();
-    this.subscription = interval(30000).subscribe(x => {
+    this.subscription = interval(10000).subscribe(x => {
       this.getBidHistory();
     });
   }

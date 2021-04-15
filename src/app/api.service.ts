@@ -36,6 +36,7 @@ export class ApiService {
             localStorage.setItem('api_token', user.api_token);
             localStorage.setItem('user_id', user.id);
             this.snackBar.open('Logged In Successfully', undefined, {duration: 2000});
+            location.reload();
             observer.complete();
           }, error => {
             this.snackBar.open('Invalid Credentials', undefined, {duration: 2000});

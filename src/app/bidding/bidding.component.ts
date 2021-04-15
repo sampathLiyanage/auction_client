@@ -7,6 +7,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {BidHistoryComponent} from '../bid-history/bid-history.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {interval, Subscription} from 'rxjs';
+import {ConfigComponent} from '../config/config.component';
 
 @Component({
   selector: 'app-bidding',
@@ -20,7 +21,7 @@ export class BiddingComponent implements OnInit {
   itemName: string;
   autoBidEnabled!: boolean | null;
   @ViewChild(BidHistoryComponent) bidHistoryList!: BidHistoryComponent;
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private snackbar: MatSnackBar) {
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private snackbar: MatSnackBar, private dialog: MatDialog) {
     this.itemId = null;
     this.item = null;
     this.itemName = '';
@@ -60,10 +61,23 @@ export class BiddingComponent implements OnInit {
 
   updateAutoBidStatus(event: any): void {
     this.apiService.updateAutoBidStatus({item_id: event.item.id, auto_bid_enabled: event.auto_bid_enabled}).subscribe(() => {
-      let message = 'Bid Placed Successfully';
-      message = event.auto_bid_enabled ? 'Auto Bid Enabled' : 'Auto Bid Disabled';
+      const message = event.auto_bid_enabled ? 'Auto Bid Enabled' : 'Auto Bid Disabled';
       this.snackbar.open(message, undefined, {duration: 5000});
       this.bidHistoryList.getBidHistory();
+      this.openBiddingConfigurationWarning();
+    });
+  }
+
+  openBiddingConfigurationWarning(): void {
+    this.apiService.getConfiguration().subscribe((config) => {
+      if (config.max_bid_amount === null) {
+        const snackBarRef = this.snackbar.open(
+          'Maximum Auto Bid Amount Needs to be Configured For Auto Bidding to Work', 'Configure'
+        );
+        snackBarRef.onAction().subscribe(() => {
+          this.dialog.open(ConfigComponent);
+        });
+      }
     });
   }
 }

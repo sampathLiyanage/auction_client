@@ -11,6 +11,10 @@
     <th mat-header-cell *matHeaderCellDef> Bidding Time </th>
     <td mat-cell *matCellDef="let element"> {{formatDateTime(element.created_at)}} </td>
   </ng-container>
+  <ng-container matColumnDef="is_auto_bid">
+    <th mat-header-cell *matHeaderCellDef> Auto Bid </th>
+    <td mat-cell *matCellDef="let element"> {{(element.is_auto_bid)?'Yes':'No'}} </td>
+  </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
