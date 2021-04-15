@@ -43,8 +43,8 @@ export class CountDownTimerComponent implements OnInit {
         }
         if (this.seconds > 0) {
           this.countDownMessage += (this.seconds === 1) ? ('1 Second') : (this.seconds + ' Seconds');
+          this.countDownMessage += ' Remaining';
         }
-        this.countDownMessage += ' Remaining';
       }
     });
   }

@@ -11,7 +11,7 @@ export class BidHistoryComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'amount', 'created_at', 'is_auto_bid'];
   bidHistoryList!: any[];
-  public latestBid: number | null;
+  public latestBid: any;
   private subscription!: Subscription;
 
   @Input() itemId !: number;
@@ -48,7 +48,7 @@ export class BidHistoryComponent implements OnInit {
 
   setLatestBid(): void {
     if (Array.isArray(this.bidHistoryList) && this.bidHistoryList.length > 0) {
-      this.latestBid = this.bidHistoryList[0].amount;
+      this.latestBid = this.bidHistoryList[0];
     } else {
       this.latestBid = null;
     }

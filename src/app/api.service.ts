@@ -64,6 +64,7 @@ export class ApiService {
 
   logout(): void {
     localStorage.clear();
+    location.reload();
     this.snackBar.open('Logged Out Successfully', undefined, {duration: 2000});
   }
 
@@ -133,6 +134,10 @@ export class ApiService {
 
   getUserName(): string | null {
     return localStorage.getItem('user_name');
+  }
+
+  getUserId(): string | null {
+    return localStorage.getItem('user_id');
   }
 
   private doPlaceBid(params: any): Observable<any> {

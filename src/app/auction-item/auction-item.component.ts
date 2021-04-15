@@ -14,7 +14,7 @@ import {interval, Subscription} from 'rxjs';
 export class AuctionItemComponent implements OnInit {
 
   @Input() item!: AuctionItem;
-  @Input() latestBid!: number | null | undefined;
+  @Input() latestBid!: any;
   @Input() autoBidEnabled!: boolean | null | undefined;
   @Input() showSummaryOnly: boolean;
   @Output() onBid: EventEmitter<any> = new EventEmitter();
@@ -55,14 +55,18 @@ export class AuctionItemComponent implements OnInit {
     if (Date.parse(this.item.auction_end_time) <= Date.parse(currentDateTimeUtc)) {
       return this.showSummaryOnly ? 'More Details' : 'Bidding Closed';
     }
-    return 'Bid Now';
+    return this.showSummaryOnly ? 'Bid Now' : 'Submit Bid';
+  }
+
+  lastBidFromTheLoggedInUser(): boolean {
+    return this.apiService.getUserId() == this.latestBid?.user_id;
   }
 
   ngOnInit(): void {
     this.bidForm = this.formBuilder.group({
       bidInput: new FormControl('', [
         Validators.required,
-        (control: AbstractControl) => Validators.min((this.latestBid ? this.latestBid : 0) + 1)(control)
+        (control: AbstractControl) => Validators.min(((this.latestBid?.amount) ? (this.latestBid?.amount) : 0) + 1)(control)
       ])
     });
   }
