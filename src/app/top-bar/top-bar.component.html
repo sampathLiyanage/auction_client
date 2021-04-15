@@ -5,8 +5,8 @@
       <mat-label>Search</mat-label>
       <input autocomplete="off" placeholder="Enter Name or Description" [(ngModel)]="searchString" matInput>
     </mat-form-field>
-    <mat-icon *ngIf="onSearch.observers.length" title="Search" aria-hidden="false" aria-label="Example home icon" (click)="onSearch.emit(searchString)">search</mat-icon>
-    <mat-icon *ngIf="apiService.isLoggedIn()" title="Configure" aria-hidden="false" aria-label="Example home icon" (click)="config()">settings</mat-icon>
-    <mat-icon title="{{apiService.isLoggedIn()?'Logout':'Login'}}" aria-hidden="false" aria-label="Example home icon" (click)="toggleLogInOut()">{{apiService.isLoggedIn()?'power_settings_new':'vpn_key'}}</mat-icon>
+    <mat-icon *ngIf="onSearch.observers.length" matTooltip="Search" aria-hidden="false" aria-label="Example home icon" (click)="onSearch.emit(searchString)">search</mat-icon>
+    <mat-icon *ngIf="apiService.isLoggedIn()" matTooltip="Configure" aria-hidden="false" aria-label="Example home icon" (click)="config()">settings</mat-icon>
+    <mat-icon matTooltip="{{apiService.isLoggedIn()?'Logout (' + apiService.getUserName() + ')':'Login'}}" aria-hidden="false" aria-label="Example home icon" (click)="toggleLogInOut()">{{apiService.isLoggedIn()?'power_settings_new':'vpn_key'}}</mat-icon>
   </div>
 </mat-toolbar>

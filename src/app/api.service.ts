@@ -35,6 +35,7 @@ export class ApiService {
             user = user.data;
             localStorage.setItem('api_token', user.api_token);
             localStorage.setItem('user_id', user.id);
+            localStorage.setItem('user_name', user.name);
             this.snackBar.open('Logged In Successfully', undefined, {duration: 2000});
             location.reload();
             observer.complete();
@@ -128,6 +129,10 @@ export class ApiService {
       return this.doPlaceBid(params);
     }
     return dummyObservable;
+  }
+
+  getUserName(): string | null {
+    return localStorage.getItem('user_name');
   }
 
   private doPlaceBid(params: any): Observable<any> {
