@@ -59,6 +59,9 @@ export class AuctionItemComponent implements OnInit {
   }
 
   lastBidFromTheLoggedInUser(): boolean {
+    if (!this.apiService.getUserId()) {
+      return false;
+    }
     return this.apiService.getUserId() == this.latestBid?.user_id;
   }
 
